@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import DynamicForm from './components/DynamicForm';
 
 class App extends Component {
   constructor(props) {
@@ -100,18 +100,17 @@ class App extends Component {
           }
         ]
       },
-      activeRows: [] 
+      selectedUser: null 
     }; 
   }
-  viewSeatsClick(id) {
-    this.setState({ activeRows: id });
-}
-deleteUser = (index, e) => {
-    console.log(this.nextUniqueId())
-    //const users = [...this.state.users];
-    const users = Object.assign([], this.state.users);
-    users.splice(index, 1);
-    this.setState({users:users});
+  itemClick(user) {
+    this.setState({ selectedUser: user });
+  }
+  onSubmit = (model)=>{
+    alert(JSON.stringify(model));
+    this.setState({
+      data: [model, ...this.state.data.People]
+    })
   }
 
   render() {
@@ -123,10 +122,10 @@ deleteUser = (index, e) => {
         <div className="heading2">PROTOTYPE ● May 23, 2018 3:55 AM</div>
         </div>
         <div className="block1">
-        <span>
+        {/* <span>
                     <button className="contentpage" onClick={() => document.getElementById('id01').style.display = 'block'}><i class="fa fa-plus-circle"></i></button>
                     <div id="id01" class="modal">
-                        <form class="modal-content animate" action="/action_page.php">
+                        <form class="modal-content animate" >
                             <div class="imgcontainer">
                                 <span onClick={() => document.getElementById('id01').style.display = 'none'} class="close" title="Close Modal">&times;</span>
                                 <img className="user2" src={require('./img/user1.svg')}></img>
@@ -135,31 +134,43 @@ deleteUser = (index, e) => {
                                <div><span className="textarea">Description</span><textarea class="f2" rows="6" cols="20" name="comment" form="usrform"></textarea></div> 
                                <button className="cancel">Cancel</button><button className="adduser">Add user</button>
                             </div>
-                            
-                           
                         </form>
                     </div>
-                </span>
-        
+                </span> */}
+        <DynamicForm
+        model={[
+            {key: "name", label: "Name", props: {required: true}},
+            {key: "id",label: "id"},
+            {key: "Description",label: "Description",props: {required: true}},
+        ]}
+        onSubmit = {(model) => {this.onSubmit(model)}}
+        />
         <div className="block2">
         <span className="sideblock">
         <input className="checkbox" type="checkbox"></input><span className="people">People</span><img className="recycle" src={require('./img/recycle.svg')}></img>
+        <div>
         {this.state.data.People.map((e) => {
           return <div> 
-        <button className="button1" onClick={() => this.viewSeatsClick(e.id)}><input className="checkbox1" type="checkbox"></input><img className="icon1" src={require('./img/user.svg')}></img><span className="user">{e.name}</span></button>
-        <div className={`block3 ${this.state.activeRows == e.id ? 'activeRowClass' : ''}`}>
-        <div className="display1">
-        <img className="user1" src={require('./img/user1.svg')}></img>
-        <div className="name">Name&emsp;&emsp;<span className="namedesign">{e.name}</span></div>
-        <div className="id">id<span className="identification">{e.id}</span></div>
-        <div className="data">Description&emsp;&emsp; <span className="datades">{e.Description}</span></div>
+        <button className="button1" onClick={() => {this.itemClick(e);}}><input className="checkbox1" type="checkbox"></input><img className="icon1" src={require('./img/user.svg')}></img><span className="user">{e.name}</span></button>
+        
         {/* <button className="close1" title="Close" onClick={() => this.viewSeatsClick(e.id)}><i class='far fa-times-circle'></i></button> */}
         </div>
-        </div>
-        
-        </div>
         })}
+         <div className="content">{this.state.selectedUser != null ? (
+           <div>
+           <img className="user1" src={require('./img/user1.svg')}></img>
+           <div className="name">Name&emsp;&emsp;<span className="namedesign">{this.state.selectedUser.name}</span></div>
+           <div className="id">id<span className="identification">{this.state.selectedUser.id}</span></div>
+           <div className="data">Description&emsp;&emsp; <span className="datades">{this.state.selectedUser.Description}</span></div>
+           </div>
+          ) : (
+            ""
+          )}
+        </div>
+        </div>
+
         </span>
+        
         </div>
         </div> 
         </div>

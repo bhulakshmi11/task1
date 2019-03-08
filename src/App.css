@@ -146,10 +146,8 @@
 .activeRowClass .display1 {
   display: block;
 }
-.display1 {
-  /* background-color: blue; */
-    margin-top: -39px;
-    display: none;
+.content {
+  margin-top: -219px;
     height: 443px;
     width: 693px;
     margin-left: 227px;
@@ -200,12 +198,6 @@
   overflow: hidden;
   text-overflow: "----"; 
 }
-.user1{
-  height: 45px;
-  width: 45px;
-  margin-left: -536px;
-  margin-top: 54px;
-}
 .id{
   margin-left: -154px;
   font-size: 19px
@@ -233,7 +225,13 @@
   /* background-color: rgba(219, 210, 210, 0.945); */
   padding-top: 60px;
 }
-
+.cancel {
+  border: none;
+  background-color: transparent;
+  margin-left: 4px;
+  outline: none;
+  margin-top: 14px;
+}
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
@@ -267,13 +265,13 @@
     color: #000;
     font-size: 45px;
     font-weight: 200;
-    margin-left: -15px;
+    margin-left: 248px;
     cursor: pointer;
 }
 .user2{
     height: 45px;
     width: 45px;
-    margin-left: -361px;
+    margin-left: 2px;
     margin-top: 16px;
 }
 .name1{
@@ -291,6 +289,12 @@
   margin-top: 30px;
     margin-left: -39px;
 
+}
+.user1 {
+  height: 45px;
+  width: 45px;
+  margin-left: -536px;
+  margin-top: 54px;
 }
 .text2{
   margin-top: 24px;
@@ -313,20 +317,47 @@
 textarea{
   resize: none;
 }
-.cancel{
+.adduser {
   border: none;
-  background-color: transparent;
-  margin-left: 109px;
-  outline: none;
-}
-.adduser{
-  border: none;
-    height: 42px;
-    width: 113px;
-    border-radius: 37px;
-    background-color: blue;
-    color: white;
-    margin-left: 35px;
+  height: 42px;
+  width: 113px;
+  border-radius: 37px;
+  background-color: blue;
+  color: white;
+  margin-left: 228px;
     outline: none;
-    margin-top: 44px;
+    margin-top: -29px;
+}
+.dynamic-form .form-label {
+  text-align: left;
+  margin-top: 25px;
+}
+.dynamic-form .form-input{
+  margin-top: 5px;
+  line-height: 1.5em;
+  width: 239px;
+  margin-left: 97px;
+  margin-top: -20px;
+}
+.dynamic-form .form-group {
+  padding: .5em;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.dynamic-form {
+  background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    box-shadow: 2px 3px 5px 3px #eeebeb;
+    width: 27%;
+    height: 350px;
+    margin-left: 301px;
+    margin-top: 160px;
+}
+.user2 {
+  height: 45px;
+  width: 45px;
+  margin-left: -19px;
+  margin-top: 16px;
 }
