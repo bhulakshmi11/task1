@@ -140,7 +140,7 @@ class App extends Component {
       <div className="App">
         <div className="header">
         <div className="box1">
-        <div className="heading1">Intial‑Task</div>
+        <div className="heading1">Initial‑Task</div>
         <div className="heading2">PROTOTYPE ● May 23, 2018 3:55 AM</div>
         </div>
         <div className="block1">
