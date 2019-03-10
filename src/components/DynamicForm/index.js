@@ -6,6 +6,8 @@ export default class DynamicForm extends React.Component {
     }
     onSubmit = (s) => {
         s.preventDefault();
+        // s.stopPropagation();
+        // s.nativeEvent.stopImmediatePropagation();
         if (this.props.onSubmit) this.props.onSubmit(this.state);
     }
     onChange = (s, key) => {
@@ -15,8 +17,10 @@ export default class DynamicForm extends React.Component {
     }
 
     renderForm = () => {
+        
         let model = this.props.model;
         let formUI = model.map((m) => {
+           
             let key = m.key;
             let type = m.type || "text";
             let props = m.props || {};
@@ -49,7 +53,7 @@ export default class DynamicForm extends React.Component {
             <span onClick={() => document.getElementById('id01').style.display = 'none'} class="close" title="Close Modal">&times;</span>
             {this.renderForm()}
             <div className="form-group">
-            <button onClick={() => document.getElementById('id01').style.display = 'none'} className="cancel">Cancel</button><button type="submit" className="adduser">Add user</button>
+            <button onClick={() => document.getElementById('id01').style.display = 'none'} className="cancel">Cancel</button><button onClick={() => document.getElementById('id01').style.display = 'none'} type="submit" className="adduser">Add user</button>
            
             </div>
             </form>

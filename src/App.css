@@ -97,8 +97,7 @@
 .checkbox{
   border-radius:0px;
   vertical-align: middle;
-  margin-left: -20px;
-
+  margin-left: -3px;
 }
 .recycle{
   height:20px;
@@ -137,15 +136,7 @@
   width:10px;
   vertical-align: middle;
 }
-.activeRowClass {
-  height: 417px;
-    /* width: 704px;
-    margin-left: 222px;
-    background-color: blue; */
-}
-.activeRowClass .display1 {
-  display: block;
-}
+
 .content {
   margin-top: -219px;
     height: 443px;

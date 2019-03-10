@@ -98,21 +98,43 @@ class App extends Component {
               "Dead Batteries"
             ]
           }
-        ]
+        ],
       },
-      selectedUser: null 
+      selectedUser: null ,
+      delete: []
     }; 
   }
   itemClick(user) {
     this.setState({ selectedUser: user });
   }
-  onSubmit = (model)=>{
-    alert(JSON.stringify(model));
-    this.setState({
-      data: [model, ...this.state.data.People]
-    })
+  deleteUser(val, id) {
+    let arr = this.state.delete;
+    if (val) {
+      arr.push(id);
+    } else {
+      arr.splice(arr.indexOf(id), 1);
+    }
+    this.setState({ delete: arr });
   }
-
+  deleteClick() {
+    let people = this.state.data.People;
+    let arr = people.filter(e => {
+      return this.state.delete.indexOf(e.id) == -1;
+    });
+    let data = {
+      People: arr
+    };
+    this.setState({ delete: [], data, selectedUser: null });
+  }
+  onSubmit = model => {
+    JSON.stringify(model);
+    let data = {
+      People: [model, ...this.state.data.People]
+    };
+    this.setState({
+      data: data
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -122,21 +144,6 @@ class App extends Component {
         <div className="heading2">PROTOTYPE ● May 23, 2018 3:55 AM</div>
         </div>
         <div className="block1">
-        {/* <span>
-                    <button className="contentpage" onClick={() => document.getElementById('id01').style.display = 'block'}><i class="fa fa-plus-circle"></i></button>
-                    <div id="id01" class="modal">
-                        <form class="modal-content animate" >
-                            <div class="imgcontainer">
-                                <span onClick={() => document.getElementById('id01').style.display = 'none'} class="close" title="Close Modal">&times;</span>
-                                <img className="user2" src={require('./img/user1.svg')}></img>
-                               <div><span className="name1">Name</span><input type="text" className="text1"></input></div> 
-                               <div><span className="name2">id</span><input type="text" className="text2"></input></div>
-                               <div><span className="textarea">Description</span><textarea class="f2" rows="6" cols="20" name="comment" form="usrform"></textarea></div> 
-                               <button className="cancel">Cancel</button><button className="adduser">Add user</button>
-                            </div>
-                        </form>
-                    </div>
-                </span> */}
         <DynamicForm
         model={[
             {key: "name", label: "Name", props: {required: true}},
@@ -147,15 +154,15 @@ class App extends Component {
         />
         <div className="block2">
         <span className="sideblock">
-        <input className="checkbox" type="checkbox"></input><span className="people">People</span><img className="recycle" src={require('./img/recycle.svg')}></img>
+        <input className="checkbox" type="checkbox"></input><span className="people">People</span><img alt="remove" src=""onClick={() => { this.deleteClick();}}className="recycle" src={require('./img/recycle.svg')}></img>
         <div>
         {this.state.data.People.map((e) => {
           return <div> 
-        <button className="button1" onClick={() => {this.itemClick(e);}}><input className="checkbox1" type="checkbox"></input><img className="icon1" src={require('./img/user.svg')}></img><span className="user">{e.name}</span></button>
-        
-        {/* <button className="close1" title="Close" onClick={() => this.viewSeatsClick(e.id)}><i class='far fa-times-circle'></i></button> */}
+        <button className="button1" onClick={() => {this.itemClick(e);}}><input name={"chk" + e.id} onClick={ev => {this.deleteUser(ev.target.checked, e.id);}}  className="checkbox1" type="checkbox"></input><img className="icon1" src={require('./img/user.svg')}></img><span className="user">{e.name}</span></button>
+       
         </div>
         })}
+        
          <div className="content">{this.state.selectedUser != null ? (
            <div>
            <img className="user1" src={require('./img/user1.svg')}></img>
@@ -168,7 +175,7 @@ class App extends Component {
           )}
         </div>
         </div>
-
+ 
         </span>
         
         </div>
